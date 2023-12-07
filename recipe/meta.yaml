@@ -24,10 +24,15 @@ source:
   sha256: c09836df1f43a3496f2b61ad8827af662ace298508869564a40c30d909ba550f  # [win]
 
 build:
-  number: 1
+  number: 2
+  binary_relocation: false
   skip: true  # [osx]
 
 test:
+  requires:
+    - patchelf  # [linux]
+  files:
+    - test-rpath.sh
   commands:
     - test -L $PREFIX/lib/libcusolver.so.{{ version.split(".")[0] }}    # [linux]
     - test -L $PREFIX/lib/libcusolver.so.{{ version }}                  # [linux]
@@ -37,6 +42,7 @@ test:
     - test -L $PREFIX/lib/libcusolverMg.so.{{ version }}                # [linux]
     - test -L $PREFIX/targets/{{ target_name }}/lib/libcusolverMg.so.{{ version.split(".")[0] }}  # [linux]
     - test -f $PREFIX/targets/{{ target_name }}/lib/libcusolverMg.so.{{ version }}                # [linux]
+    - bash test-rpath.sh                                                                          # [linux]
     - if not exist %LIBRARY_BIN%\cusolver*.dll exit 1                  # [win]
     - if not exist %LIBRARY_BIN%\cusolverMg*.dll exit 1                # [win]
 
@@ -52,6 +58,7 @@ outputs:
         - {{ compiler("cxx") }}
         - arm-variant * {{ arm_variant_type }}  # [aarch64]
         - sysroot_{{ target_platform }} 2.17    # [linux]
+        - patchelf <0.18.0                      # [linux]
       host:
         - cuda-version {{ cuda_version }}
         - libcublas
