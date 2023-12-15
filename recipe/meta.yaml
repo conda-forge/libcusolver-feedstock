@@ -1,6 +1,6 @@
 {% set name = "libcusolver" %}
-{% set version = "11.4.2.57" %}
-{% set cuda_version = "12.0" %}
+{% set version = "11.4.5.107" %}
+{% set cuda_version = "12.1" %}
 {% set platform = "linux-x86_64" %}  # [linux64]
 {% set platform = "linux-ppc64le" %}  # [ppc64le]
 {% set platform = "linux-sbsa" %}  # [aarch64]
@@ -18,13 +18,13 @@ package:
 
 source:
   url: https://developer.download.nvidia.com/compute/cuda/redist/{{ name }}/{{ platform }}/{{ name }}-{{ platform }}-{{ version }}-archive.{{ extension }}
-  sha256: c9460db500d0c7d14debb2c8e0d88fc26a39197363f1b000ccf760866f636f12  # [linux64]
-  sha256: bf3c9a090652d011aafe2190c6f26fe108194cf8512d3c571e406054740168bb  # [ppc64le]
-  sha256: 0ca46b73520657f96f921711c05af7053bd398328d510aecddfff2521c000e91  # [aarch64]
-  sha256: c09836df1f43a3496f2b61ad8827af662ace298508869564a40c30d909ba550f  # [win]
+  sha256: 7169970001e71fbd8ff2678830af9a90edd23d0165f53c829c00a6decfe464f8  # [linux64]
+  sha256: 4366b28caf8d44703a491bd654ca2388ad3f122e22fd494396b78707889f538a  # [ppc64le]
+  sha256: 06bb7bdc008de189117f258ebc4c190392be3950afbcd78b40603ff165bdef74  # [aarch64]
+  sha256: 974f0754076678dff903a0f34f50594fa683e54b7ad1ee59b98b86a60a591cdb  # [win]
 
 build:
-  number: 2
+  number: 0
   binary_relocation: false
   skip: true  # [osx]
 
@@ -62,10 +62,12 @@ outputs:
       host:
         - cuda-version {{ cuda_version }}
         - libcublas
+        - libcusparse
         - libnvjitlink
       run:
         - {{ pin_compatible("cuda-version", max_pin="x.x") }}
         - {{ pin_compatible("libcublas", max_pin="x.x") }}
+        - {{ pin_compatible("libcusparse", max_pin="x.x") }}
         - {{ pin_compatible("libnvjitlink", max_pin="x.x") }}
       run_constrained:
         - arm-variant * {{ arm_variant_type }}  # [aarch64]
@@ -191,4 +193,4 @@ about:
 
 extra:
   recipe-maintainers:
-    - adibbley
+    - conda-forge/cuda
