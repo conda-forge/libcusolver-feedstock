@@ -13,35 +13,21 @@ Package license: [LicenseRef-NVIDIA-End-User-License-Agreement](https://docs.nvi
 
 Summary: CUDA Linear Solver Library
 
+Documentation: https://docs.nvidia.com/cuda/cusolver/index.html
+
+cuSOLVER - Direct Linear Solvers on NVIDIA GPUs
+
+
+About libcusolver
+-----------------
+
+Home: https://developer.nvidia.com/cusolver
+
+Package license: [LicenseRef-NVIDIA-End-User-License-Agreement](https://docs.nvidia.com/cuda/eula/index.html)
+
+Summary: CUDA Linear Solver Library
+
 Documentation: https://docs.nvidia.com/cuda/cusolver/
-
-cuSOLVER - Direct Linear Solvers on NVIDIA GPUs
-
-
-About libcusolver-static
-------------------------
-
-Home: https://developer.nvidia.com/cusolver
-
-Package license: [LicenseRef-NVIDIA-End-User-License-Agreement](https://docs.nvidia.com/cuda/eula/index.html)
-
-Summary: CUDA Linear Solver Library
-
-Documentation: https://docs.nvidia.com/cuda/cusolver/index.html
-
-cuSOLVER - Direct Linear Solvers on NVIDIA GPUs
-
-
-About libcusolver-dev
----------------------
-
-Home: https://developer.nvidia.com/cusolver
-
-Package license: [LicenseRef-NVIDIA-End-User-License-Agreement](https://docs.nvidia.com/cuda/eula/index.html)
-
-Summary: CUDA Linear Solver Library
-
-Documentation: https://docs.nvidia.com/cuda/cusolver/index.html
 
 cuSOLVER - Direct Linear Solvers on NVIDIA GPUs
 
