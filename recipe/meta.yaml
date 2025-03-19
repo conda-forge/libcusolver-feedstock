@@ -23,7 +23,7 @@ source:
   sha256: c71e33208740f6bce9f1da8fc7e9fa679ddfc831b5368a121f9c1ada3fa3d980  # [win]
 
 build:
-  number: 0
+  number: 1
   skip: true  # [osx or ppc64le]
   script_env:
     - component_name={{ name }}
@@ -33,7 +33,7 @@ requirements:
     - arm-variant * {{ arm_variant_type }}  # [aarch64]
     - {{ stdlib("c") }}
     - patchelf <0.18.0                      # [linux]
-    - cf-nvidia-tools                       # [linux]
+    - cf-nvidia-tools 1.*                   # [linux]
 
 outputs:
   - name: libcusolver
@@ -153,7 +153,7 @@ outputs:
 
   - name: libcusolver-static
     build:
-      skip: true                # [win]
+      skip: true  # [win]
       binary_relocation: false
     files:
       - targets/{{ target_name }}/lib/libcusolver*_static.a
