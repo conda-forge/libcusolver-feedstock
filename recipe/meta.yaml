@@ -1,5 +1,5 @@
 {% set name = "libcusolver" %}
-{% set version = "12.0.3.29" %}
+{% set version = "12.0.4.66" %}
 {% set cuda_version = "13.0" %}
 {% set platform = "linux-x86_64" %}  # [linux64]
 {% set platform = "linux-ppc64le" %}  # [ppc64le]
@@ -18,9 +18,9 @@ package:
 
 source:
   url: https://developer.download.nvidia.com/compute/cuda/redist/{{ name }}/{{ platform }}/{{ name }}-{{ platform }}-{{ version }}-archive.{{ extension }}
-  sha256: 768e61f3b2448d5f05fa8f5465f9b22d7c186f2ec3418697f507d1b9855e8dbf  # [linux64]
-  sha256: 4c8450862a909f3c275b903f277b48711fb2c89f027fe8d4b832b3d72a9ecf20  # [aarch64]
-  sha256: e0aadc965d757c615a50ffb1c48c155f4b6e1bbaf96100a20b2e46964de8f6da  # [win]
+  sha256: 1cd13dcb58c5e4bb0ce47ea8876aba21091c1e67165c616144b2dd6331d252ec  # [linux64]
+  sha256: 882c480bedd5ec6e416fe0a9edb7bfdd78f6ffa885310870e4a04d8fce8e655d  # [aarch64]
+  sha256: 8fe0aa8b2f8709402a8a7494037cdb648f0be7da1ed14e511cefea88a532ef8b  # [win]
 
 build:
   number: 0
@@ -42,7 +42,7 @@ outputs:
     files:
       - lib/libcusolver*.so.*                            # [linux]
       - targets/{{ target_name }}/lib/libcusolver*.so.*  # [linux]
-      - Library\bin\{{ target_name }}\cusolver*.dll                    # [win]
+      - Library\bin\cusolver*.dll                    # [win]
     requirements:
       build:
         - {{ compiler("c") }}
@@ -77,8 +77,8 @@ outputs:
         - test -L $PREFIX/targets/{{ target_name }}/lib/libcusolverMg.so.{{ version.split(".")[0] }}  # [linux]
         - test -f $PREFIX/targets/{{ target_name }}/lib/libcusolverMg.so.{{ version }}                # [linux]
         - bash test-rpath.sh                                                                          # [linux]
-        - if not exist %LIBRARY_BIN%\{{ target_name }}\cusolver*.dll exit 1                  # [win]
-        - if not exist %LIBRARY_BIN%\{{ target_name }}\cusolverMg*.dll exit 1                # [win]
+        - if not exist %LIBRARY_BIN%\cusolver*.dll exit 1                  # [win]
+        - if not exist %LIBRARY_BIN%\cusolverMg*.dll exit 1                # [win]
     about:
       home: https://developer.nvidia.com/cusolver
       license_file: LICENSE
