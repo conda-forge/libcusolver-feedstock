@@ -23,7 +23,7 @@ source:
   sha256: 8fe0aa8b2f8709402a8a7494037cdb648f0be7da1ed14e511cefea88a532ef8b  # [win]
 
 build:
-  number: 0
+  number: 1
   skip: true  # [osx or ppc64le]
   script_env:
     - component_name={{ name }}
