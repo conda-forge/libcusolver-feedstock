@@ -3,11 +3,13 @@
 {% set cuda_version = "12.9" %}
 {% set platform = "linux-x86_64" %}  # [linux64]
 {% set platform = "linux-ppc64le" %}  # [ppc64le]
-{% set platform = "linux-sbsa" %}  # [aarch64]
+{% set platform = "linux-sbsa" %}  # [aarch64 and arm_variant_type=="sbsa"]
+{% set platform = "linux-aarch64" %}  # [aarch64 and arm_variant_type=="tegra"]
 {% set platform = "windows-x86_64" %}  # [win]
 {% set target_name = "x86_64-linux" %}  # [linux64]
 {% set target_name = "ppc64le-linux" %}  # [ppc64le]
-{% set target_name = "sbsa-linux" %}  # [aarch64]
+{% set target_name = "sbsa-linux" %}  # [aarch64 and arm_variant_type=="sbsa"]
+{% set target_name = "aarch64-linux" %}  # [aarch64 and arm_variant_type=="tegra"]
 {% set target_name = "x64" %}  # [win]
 {% set extension = "tar.xz" %}  # [not win]
 {% set extension = "zip" %}  # [win]
@@ -19,11 +21,12 @@ package:
 source:
   url: https://developer.download.nvidia.com/compute/cuda/redist/{{ name }}/{{ platform }}/{{ name }}-{{ platform }}-{{ version }}-archive.{{ extension }}
   sha256: 3d3b96f3087dbc43893a28691b172f31725b316d524f5a3c1e6837257c898d06  # [linux64]
-  sha256: db463593ffcbc78f542a7f1ef808da43bf742acae654d970d99a47289c2a83e5  # [aarch64]
+  sha256: db463593ffcbc78f542a7f1ef808da43bf742acae654d970d99a47289c2a83e5  # [aarch64 and arm_variant_type=="sbsa"]
+  sha256: 45e2fefeee5797c0492d8a9ee26c3dbb7af0cdcefe6f1cd25bd586daa633d9a0  # [aarch64 and arm_variant_type=="tegra"]
   sha256: e991d64a0bbe3e0bb69ce2adce000244288002b0341894729666d66adb9b4f25  # [win]
 
 build:
-  number: 1
+  number: 2
   skip: true  # [osx or ppc64le]
   script_env:
     - component_name={{ name }}
@@ -60,7 +63,6 @@ outputs:
         - {{ pin_compatible("libcublas", max_pin="x.x") }}
         - {{ pin_compatible("libcusparse", max_pin="x.x") }}
         - {{ pin_compatible("libnvjitlink", max_pin="x") }}
-      run_constrained:
         - arm-variant * {{ arm_variant_type }}  # [aarch64]
     test:
       requires:
@@ -115,8 +117,8 @@ outputs:
       run:
         - {{ pin_compatible("cuda-version", max_pin="x.x") }}
         - {{ pin_subpackage("libcusolver", exact=True) }}
-      run_constrained:
         - arm-variant * {{ arm_variant_type }}  # [aarch64]
+      run_constrained:
         - libcusolver-static >={{ version }}      # [linux]
     test:
       commands:
@@ -124,7 +126,7 @@ outputs:
         - test -L $PREFIX/lib/libcusolverMg.so                              # [linux]
         - test -f $PREFIX/lib/pkgconfig/cusolver*.pc                        # [linux]
         - test -f $PREFIX/targets/{{ target_name }}/include/cusolverDn.h                   # [linux]
-        - test -f $PREFIX/targets/{{ target_name }}/include/cusolverMg.h                   # [linux]
+        - test -f $PREFIX/targets/{{ target_name }}/include/cusolverMg.h                   # [aarch64 and arm_variant_type!="tegra"]
         - test -f $PREFIX/targets/{{ target_name }}/include/cusolverRf.h                   # [linux]
         - test -f $PREFIX/targets/{{ target_name }}/include/cusolverSp.h                   # [linux]
         - test -f $PREFIX/targets/{{ target_name }}/include/cusolverSp_LOWLEVEL_PREVIEW.h  # [linux]
@@ -172,7 +174,6 @@ outputs:
         - {{ pin_compatible("cuda-version", max_pin="x.x") }}
         - {{ pin_compatible("libcublas-static", max_pin="x.x") }}
         - {{ pin_compatible("libcusparse-static", max_pin="x.x") }}
-      run_constrained:
         - arm-variant * {{ arm_variant_type }}  # [aarch64]
     test:
       commands:
