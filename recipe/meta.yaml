@@ -1,6 +1,6 @@
 {% set name = "libcusolver" %}
-{% set version = "12.0.4.66" %}
-{% set cuda_version = "13.0" %}
+{% set version = "12.0.7.41" %}
+{% set cuda_version = "13.1" %}
 {% set platform = "linux-x86_64" %}  # [linux64]
 {% set platform = "linux-ppc64le" %}  # [ppc64le]
 {% set platform = "linux-sbsa" %}  # [aarch64]
@@ -18,12 +18,12 @@ package:
 
 source:
   url: https://developer.download.nvidia.com/compute/cuda/redist/{{ name }}/{{ platform }}/{{ name }}-{{ platform }}-{{ version }}-archive.{{ extension }}
-  sha256: 1cd13dcb58c5e4bb0ce47ea8876aba21091c1e67165c616144b2dd6331d252ec  # [linux64]
-  sha256: 882c480bedd5ec6e416fe0a9edb7bfdd78f6ffa885310870e4a04d8fce8e655d  # [aarch64]
-  sha256: 8fe0aa8b2f8709402a8a7494037cdb648f0be7da1ed14e511cefea88a532ef8b  # [win]
+  sha256: 593c9fa25ccb72b37de40873ee22135a55c441754841983fd43858157f1e3373  # [linux64]
+  sha256: bf9497ac04ec9d800878255393451581a277851e0fe63cdb381b7fdcd59494c3  # [aarch64]
+  sha256: cce5008a2f701545d213ea0e4e0ba94eb0a03e39e64916065803b5b6ff1bb2c6  # [win]
 
 build:
-  number: 1
+  number: 0
   skip: true  # [osx or ppc64le]
   script_env:
     - component_name={{ name }}
