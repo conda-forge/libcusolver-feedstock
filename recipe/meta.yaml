@@ -1,6 +1,6 @@
 {% set name = "libcusolver" %}
 {% set version = "12.1.0.51" %}
-{% set cuda_version = "13.2.0" %}
+{% set cuda_version = "13.2" %}
 {% set platform = "linux-x86_64" %}  # [linux64]
 {% set platform = "linux-ppc64le" %}  # [ppc64le]
 {% set platform = "linux-sbsa" %}  # [aarch64]
