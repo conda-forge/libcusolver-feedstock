@@ -1,5 +1,5 @@
 {% set name = "libcusolver" %}
-{% set version = "12.1.0.51" %}
+{% set version = "12.2.0.1" %}
 {% set cuda_version = "13.2" %}
 {% set platform = "linux-x86_64" %}  # [linux64]
 {% set platform = "linux-ppc64le" %}  # [ppc64le]
@@ -18,9 +18,9 @@ package:
 
 source:
   url: https://developer.download.nvidia.com/compute/cuda/redist/{{ name }}/{{ platform }}/{{ name }}-{{ platform }}-{{ version }}-archive.{{ extension }}
-  sha256: 81ce34ee5d0ab2f619c2b5108da0a74d15141c9e900c384568aa84a3618109f2  # [linux64]
-  sha256: 9e8a46246ce5b194a4ad67bfe83f39ed1831863360cdd9c5ef2a4182ba8b4640  # [aarch64]
-  sha256: f00ba328579f0b939e99adcfb4f71cf7ead323cf6d06b4b2b42ff1216eab0844  # [win]
+  sha256: 893b5b81527626e96b1adf7d3c6733d39d6e058b250e414bb9ca36c41a8c7081  # [linux64]
+  sha256: 6657f5d0aea0d343498bed32eb0da21bb58ad625a32acb616089c10ad2a73662  # [aarch64]
+  sha256: e558137bf62f2f69fed51e93cf11a917e4e2f2a9e5a8ef731840d201a634969c  # [win]
 
 build:
   number: 0
