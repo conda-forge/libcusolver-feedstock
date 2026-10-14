@@ -1,5 +1,5 @@
 {% set name = "libcusolver" %}
-{% set version = "12.3.4.7" %}
+{% set version = "12.3.5.3" %}
 {% set cuda_version = "13.4" %}
 {% set platform = "linux-x86_64" %}  # [linux64]
 {% set platform = "linux-ppc64le" %}  # [ppc64le]
@@ -13,10 +13,10 @@
 {% set target_name = "arm64" %}  # [win and arm64]
 {% set extension = "tar.xz" %}  # [not win]
 {% set extension = "zip" %}  # [win]
-{% set sha256 = "dd89888e75628ada3fece05eb642d8e492667fdf3714c4659104c9636863f6ec" %}  # [linux64]
-{% set sha256 = "8217d8129f46313d95d6d04acff38f625ddc03f5f377e7d1029b18a3fc37fd59" %}  # [aarch64]
-{% set sha256 = "1d3bb145a2d81ddd94a2a22d923bfdb2b59662f85be5e430ad1cb0b9d587a4b9" %}  # [win64]
-{% set sha256 = "574999b5e43a3e5d92860a274a1cd65b501fca5394a555137234200d12cacd84" %}  # [win and arm64]
+{% set sha256 = "6ad119d1d1e8cb377fe7f90cc3f6d53381b94c63ae4d7fba27aa2fce6954b572" %}  # [linux64]
+{% set sha256 = "1cc92fdd9142bfc70c6cccb15a3e8720c8f12fa3cb4ffd849bec725d96a16d1f" %}  # [aarch64]
+{% set sha256 = "0ac06a5aaaf5909872f1845c1db3187adf2164ea2b0f4c5a0e4d828cc371e2c8" %}  # [win64]
+{% set sha256 = "c6ffe5181f306d85cbf31545c2ffb5c02a663d490b0116f0472b7e55fdc656d9" %}  # [win and arm64]
 
 package:
   name: {{ name }}-split
@@ -37,7 +37,7 @@ requirements:
     - arm-variant * {{ arm_variant_type }}  # [aarch64]
     - {{ stdlib("c") }}
     - patchelf <0.18.0                      # [linux]
-    - cf-nvidia-tools 1.*                   # [linux]
+    - cf-nvidia-tools 1                     # [linux]
 
 outputs:
   - name: libcusolver
