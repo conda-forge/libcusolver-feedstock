@@ -27,7 +27,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: 1
   skip: true  # [osx or ppc64le]
   script_env:
     - component_name={{ name }}
@@ -61,9 +61,9 @@ outputs:
         - libnvjitlink
       run:
         - {{ pin_compatible("cuda-version", max_pin="x.x") }}
-        - libcublas
-        - libcusparse
-        - libnvjitlink
+        - {{ pin_compatible("libcublas", max_pin="x.x") }}
+        - {{ pin_compatible("libcusparse", max_pin="x.x") }}
+        - {{ pin_compatible("libnvjitlink", max_pin="x") }}
       run_constrained:
         - arm-variant * {{ arm_variant_type }}  # [aarch64]
     test:
@@ -174,8 +174,8 @@ outputs:
         - libcusparse-static
       run:
         - {{ pin_compatible("cuda-version", max_pin="x.x") }}
-        - libcublas-static
-        - libcusparse-static
+        - {{ pin_compatible("libcublas-static", max_pin="x.x") }}
+        - {{ pin_compatible("libcusparse-static", max_pin="x.x") }}
       run_constrained:
         - arm-variant * {{ arm_variant_type }}  # [aarch64]
     test:
